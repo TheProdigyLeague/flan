@@ -1,0 +1,16 @@
+# test_Makefile
+
+# Test 1: Check that 'build' target runs docker build with correct arguments
+make -f ../Makefile build | grep -q "docker build --no-cache -t flan_scan -f Dockerfile" && echo "PASS: build target" || echo "FAIL: build target"
+
+# Test 2: Check that 'start' target runs docker run with correct options and image
+make -f ../Makefile start | grep -q "docker run --rm --cap-drop=all --cap-add=NET_RAW" && echo "PASS: start target" || echo "FAIL: start target"
+
+# Test 3: Check that 'md' target sets format=md
+make -f ../Makefile md | grep -q "format=md" && echo "PASS: md target" || echo "FAIL: md target"
+
+# Test 4: Check that 'html' target sets format=html
+make -f ../Makefile html | grep -q "format=html" && echo "PASS: html target" || echo "FAIL: html target"
+
+# Test 5: Check that 'json' target sets format=json
+make -f ../Makefile json | grep -q "format=json" && echo "PASS: json target" || echo "FAIL: json target"
